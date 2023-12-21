@@ -7,6 +7,7 @@ import { readingController } from "./controllers/reading-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
 import { historyController } from "./controllers/history-controller.js";
 import { weatherInfoController } from "./controllers/weatherInfo-controller.js";
+import { smartHomeController } from "./controllers/smartHome-controller.js";
 
 export const router = express.Router();
 
@@ -34,6 +35,8 @@ router.get(
   "/station/:stationid/editreading/:readingid",
   readingController.index
 );
+
+router.get("/smarthome", smartHomeController.index);
 
 router.get("/about", aboutController.index);
 router.get("/history", historyController.index);
