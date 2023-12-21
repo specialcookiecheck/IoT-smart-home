@@ -2,7 +2,7 @@ export const aboutController = {
   
   // renders about page
   index(request, response) {
-    const viewData = {
+    const index = {
       title: "About WeatherTop2",
     };
     console.log("about rendering");
