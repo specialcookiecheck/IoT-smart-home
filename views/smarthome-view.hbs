@@ -1,4 +1,23 @@
 {{> menu active="SmartHome"}}
 
-{{blynkResults.button}}
-{{blynkResults.temp}}
+<div>
+  {{blynkResults.blynkRaw}}
+</div>
+<div>
+  {{blynkResults.button}}
+</div>
+<div>
+  {{blynkResults.temp}}
+</div>
+<div>
+  {{blynkResults.pressure}}
+</div>
+<div>
+  {{blynkResults.humidity}}
+</div>
+
+<div>
+  <h1>Arduino Button Events</h1>
+  <p id="events">
+  </p>
+</div>

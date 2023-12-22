@@ -1,6 +1,6 @@
 {
   "name": "WeatherTop",
-  "version": "1.0",
+  "version": "3.0",
   "description": "WeatherTop App",
   "main": "server.js",
   "type": "module",
@@ -19,7 +19,7 @@
     "axios": "^1.4.0"
   },
   "repository": {
-    "url": "https://github.com/specialcookiecheck/WeatherTop-2"
+    "url": "https://github.com/specialcookiecheck/smartHome"
   },
   "license": "MIT",
   "keywords": [
