@@ -4,7 +4,6 @@ import { stationAnalytics } from "../utils/station-analytics.js";
 import axios from "axios";
 
 export const stationController = {
-  
   // renders the station-view
   async index(request, response) {
     console.log("stationController index started");
@@ -40,7 +39,7 @@ export const stationController = {
     await readingStore.addReading(station._id, newReading);
     response.redirect("/station/" + station._id);
   },
-  
+
   // deletes a reading
   async deleteReading(request, response) {
     const stationId = request.params.stationid;
@@ -49,7 +48,7 @@ export const stationController = {
     await readingStore.deleteReading(readingId);
     response.redirect("/station/" + stationId);
   },
-  
+
   // deletes all readings associated with a station based on the browser request
   async deleteAllReadingsFromStation(request, response) {
     const stationId = request.params.id;
@@ -63,7 +62,7 @@ export const stationController = {
       console.log(`reading ${readingId} deleted`);
     }
   },
-  
+
   // deletes all readings associated with a station based on the station ID
   async deleteAllReadingsFromStationByStationId(stationId) {
     console.log(`deleting all readings associated with station ${stationId}:`);
@@ -76,7 +75,7 @@ export const stationController = {
       console.log(`reading ${readingId} deleted`);
     }
   },
-  
+
   // adds an auto-generated weather report (reading) to a station
   async addReport(request, response) {
     const station = await stationStore.getStationById(request.params.id);
@@ -96,5 +95,25 @@ export const stationController = {
     }
     await readingStore.addReading(station._id, report);
     response.redirect("/station/" + station._id);
+  },
+
+  // adds an Arduino touch-generated weather report (reading) to a station
+  async addArduinoTouchReport(arduinoTemp, arduinoPressure) {
+    console.log("addArduinoTouchReport started");
+    const station = await stationStore.getStationById("f21799a7-9d96-4af7-9fa7-29aa143e3538"); //await stationStore.getStationById(request.params.id);
+    let report = {};
+    const result = await axios.get(stationAnalytics.oneCallRequest(station));
+    if (result.status == 200) {
+      const reading = result.data.current;
+      report.time = Date(),
+      report.code = stationAnalytics.openWeatherCodeConverter(reading.weather[0].id);
+      report.temperature = Math.round(arduinoTemp * 2) / 2; //Math.round(reading.temp * 2) / 2;
+      report.windSpeed = Math.round(reading.wind_speed * 2) / 2;
+      report.pressure = Math.round(arduinoPressure); //reading.pressure;
+      report.windDirection = reading.wind_deg;
+      console.log(report);
+    }
+    await readingStore.addReading(station._id, report);
+    //response.redirect("/station/" + station._id);
   },
 };

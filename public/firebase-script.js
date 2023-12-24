@@ -19,10 +19,13 @@ const camRef = database.ref("events/button");
 
 // Sync on any updates to the DB. THIS CODE RUNS EVERY TIME AN UPDATE OCCURS ON THE DB.
 camRef.limitToLast(1).on("value", function(snapshot) {
+  console.log("frontend addArduinoTouchReport initiated");
   snapshot.forEach(function(childSnapshot) {
     const event = childSnapshot.val()["event"];
     const temp = childSnapshot.val()["temperature"];
+    const pressure = childSnapshot.val()["pressure"];
+    const humidity = childSnapshot.val()["humidity"];
     const count = childSnapshot.val()["count"];
-    document.getElementById("events").innerText += `Event: ${event}, Temp: ${temp}, Count: ${count} \n`
+    document.getElementById("events").innerText += `Event: ${event}, Temp: ${temp}, Pressure: ${pressure}, Humidity: ${humidity}, Count: ${count} \n`
       })
   });
