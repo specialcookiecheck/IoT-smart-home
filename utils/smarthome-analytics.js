@@ -2,22 +2,18 @@ import axios from "axios";
 
 const blynkAuth = 'Id8ho2TW5jHNcB384TY966cZO-DwlOVy';
 
-let blynkButton;
-let blynkTemp;
-let blynkPressure;
-let blynkHumid;
-
 export const smartHomeAnalytics = {
   async getAllBlynkReadings(){
     const getBlynkReadings = await axios.get(`https://fra1.blynk.cloud/external/api/getAll?token=${blynkAuth}`);
     console.log(getBlynkReadings.data);
-    smartHomeAnalytics.blynkStatus(getBlynkReadings.data.v0);
-    smartHomeAnalytics.blynkTemp(getBlynkReadings.data.v1);
-    blynkPressure = getBlynkReadings.data.v2;
-    blynkHumid = getBlynkReadings.data.v3;
+    const { blynkButton, refreshPage } = smartHomeAnalytics.blynkStatus(getBlynkReadings.data.v0);
+    const blynkTemp = smartHomeAnalytics.blynkTemp(getBlynkReadings.data.v1);
+    const blynkPressure = getBlynkReadings.data.v2;
+    const blynkHumid = getBlynkReadings.data.v3;
     const blynkResults = { 
       blynkRaw: getBlynkReadings.data, 
       button: blynkButton, 
+      refreshPage: refreshPage,
       temp: blynkTemp, 
       pressure: blynkPressure, 
       humidity: blynkHumid
@@ -28,15 +24,20 @@ export const smartHomeAnalytics = {
   },
   
   blynkStatus(blynkReading) {
+    let blynkButton;
+    let refreshPage;
     if (blynkReading == 0) {
       blynkButton = 'off';
+      refreshPage = false;
     } else {
       blynkButton = 'on';
+      refreshPage = true;
     }
-    return blynkButton;
+    return { blynkButton, refreshPage };
   },
   
   blynkTemp(blynkReading) {
-    blynkTemp = `${blynkReading} Celsius`
+    const blynkTemp = `${Math.round(blynkReading * 100) / 100} Celsius`;
+    return blynkTemp;
   }
 }

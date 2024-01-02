@@ -1226,6 +1226,16 @@
       "windDirection": 268,
       "_id": "963144b5-ae5c-4392-9cfb-84810d1330ec",
       "stationid": "f21799a7-9d96-4af7-9fa7-29aa143e3538"
+    },
+    {
+      "time": "Thu Dec 28 2023 17:24:01 GMT+0000 (Coordinated Universal Time)",
+      "code": 200,
+      "temperature": 15,
+      "windSpeed": 12,
+      "pressure": 993,
+      "windDirection": 240,
+      "_id": "618e9a87-3b05-4c5b-83e1-feb778663126",
+      "stationid": "f21799a7-9d96-4af7-9fa7-29aa143e3538"
     }
   ]
 }

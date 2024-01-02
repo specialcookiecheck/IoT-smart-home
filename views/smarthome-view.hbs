@@ -1,6 +1,7 @@
 {{> menu active="SmartHome"}}
 
-<div>
+<div id="BlynkValues">
+  <div>
   {{blynkResults.blynkRaw}}
 </div>
 <div>
@@ -15,4 +16,10 @@
 <div>
   {{blynkResults.humidity}}
 </div>
+</div>
+
+
+{{#if blynkResults.refreshPage }}
+  {{> smart-home-refresh-script }}
+{{/if }}
 
