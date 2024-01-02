@@ -107,9 +107,9 @@ export const stationController = {
       const reading = result.data.current;
       report.time = Date(),
       report.code = stationAnalytics.openWeatherCodeConverter(reading.weather[0].id);
-      report.temperature = Math.round(arduinoTemp * 2) / 2; //Math.round(reading.temp * 2) / 2;
+      report.temperature = Math.round(arduinoTemp * 2) / 2;
       report.windSpeed = Math.round(reading.wind_speed * 2) / 2;
-      report.pressure = Math.round(arduinoPressure); //reading.pressure;
+      report.pressure = Math.round(arduinoPressure);
       report.windDirection = reading.wind_deg;
       console.log(report);
     }
