@@ -1236,6 +1236,16 @@
       "windDirection": 240,
       "_id": "618e9a87-3b05-4c5b-83e1-feb778663126",
       "stationid": "f21799a7-9d96-4af7-9fa7-29aa143e3538"
+    },
+    {
+      "time": "Wed Jan 03 2024 16:35:17 GMT+0000 (Coordinated Universal Time)",
+      "code": 200,
+      "temperature": 15.5,
+      "windSpeed": 1,
+      "pressure": 992,
+      "windDirection": 264,
+      "_id": "ca0dbe58-1355-4d9f-8d13-41aa0b8708a1",
+      "stationid": "f21799a7-9d96-4af7-9fa7-29aa143e3538"
     }
   ]
 }
