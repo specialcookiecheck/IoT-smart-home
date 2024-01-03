@@ -9,3 +9,5 @@ References:
 - https://www.javascripttutorial.net/javascript-return-multiple-values/
 - https://medium.com/tanda-developers/a-beginners-guide-to-using-webhooks-3d95018fabbc
 - https://docs.blynk.io/en/blynk.console/settings/developers/webhooks
+- https://www.w3schools.com/js/js_json_parse.asp
+- https://support.arduino.cc/hc/en-us/articles/4407830972050-Find-and-stop-process-blocking-a-port
