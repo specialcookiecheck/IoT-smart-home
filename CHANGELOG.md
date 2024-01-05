@@ -11,3 +11,6 @@
 
 ## version 2.2
 - final version, unnecessary code removed, comments added
+
+## version 3.0
+- fully working with SmartHome/ Arduino connections
