@@ -1,25 +1,34 @@
 {{> menu active="SmartHome"}}
 
-<div id="BlynkValues">
-  <div>
-  {{blynkResults.blynkRaw}}
-</div>
-<div>
-  {{blynkResults.button}}
-</div>
-<div>
-  {{blynkResults.temp}}
-</div>
-<div>
-  {{blynkResults.pressure}}
-</div>
-<div>
-  {{blynkResults.humidity}}
-</div>
-</div>
+<div class="content box">
 
+  <table class="table has-text-link-dark">
+    <thead class="title">
+      <tr class="sunny has-text-centered">
+        <th class="has-text-link">Auto-update<i class="fa fa-refresh main-icon"></i></th>
+        <th class="has-text-link">Temperature <i class="fas fa-temperature-half main-icon"></i></th>
+        <th class="has-text-link">Humidity <i class="far fa-grin-beam-sweat main-icon"></i></th>
+        <th class="has-text-link">Pressure <i class="fa fa-layer-group main-icon"></i></th>
+        <th class="has-text-link">Light or Dark <i class="fa fa-star-half-full main-icon"></i></th>
+      </tr>
+    </thead>
+    <tbody class="has-background-link-dark">
+      <tr>
+        
+        {{> blynk-readings}}
+      
+      </tr>
+    </tbody>
+  </table>
+  
+  <div>
+  <h3 class="subtitle has-text-link-dark is-6">Station currently associated with your Arduino SmartHome:</h3>
+  <p class="has-text-link-dark"><i class="fas fa-location-crosshairs"></i>
+      {{station.location}}
+  </p>
+</div>
+</div>
 
 {{#if blynkResults.refreshPage }}
   {{> smart-home-refresh-script }}
 {{/if }}
-

@@ -1,6 +1,8 @@
 import { stationStore } from "../models/station-store.js";
 import { readingStore } from "../models/reading-store.js";
+import { userStore } from "../models/user-store.js";
 import { stationAnalytics } from "../utils/station-analytics.js";
+import {  } from "../utils/station-analytics.js";
 import axios from "axios";
 
 export const stationController = {
@@ -98,9 +100,15 @@ export const stationController = {
   },
 
   // adds an Arduino touch-generated weather report (reading) to a station
-  async addArduinoTouchReport(arduinoTemp, arduinoPressure) {
+  async addArduinoTouchReport(userEmail, arduinoTemp, arduinoPressure) {
     console.log("addArduinoTouchReport started");
-    const station = await stationStore.getStationById("f21799a7-9d96-4af7-9fa7-29aa143e3538"); //await stationStore.getStationById(request.params.id);
+    //const station = await stationStore.getStationById("f21799a7-9d96-4af7-9fa7-29aa143e3538"); //await stationStore.getStationById(request.params.id);
+    const user = await userStore.getUserByEmail(userEmail);
+    console.log(user);
+    const arduinoLocation = user.arduinoLocation;
+    console.log(arduinoLocation);
+    const station = await stationStore.getStationByLocation(arduinoLocation);
+    console.log(station);
     let report = {};
     const result = await axios.get(stationAnalytics.oneCallRequest(station));
     if (result.status == 200) {

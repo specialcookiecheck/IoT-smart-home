@@ -1,5 +1,7 @@
 import { smartHomeAnalytics } from "../utils/smarthome-analytics.js";
 import { stationController } from "./station-controller.js";
+import { userStore } from "../models/user-store.js";
+import { stationStore } from "../models/station-store.js";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, onChildAdded, onChildChanged } from "firebase/database";
@@ -18,12 +20,23 @@ export const smartHomeController = {
   
   // renders Smart Home page
   async index(request, response) {
+    const user = await smartHomeController.getLoggedInUser(request);
+    const arduinoLocation = user.arduinoLocation;
+    const station = await stationStore.getStationByLocation(arduinoLocation);
     const viewData = {
       title: "Smart Home",
-      blynkResults: await smartHomeAnalytics.getAllBlynkReadings()
+      blynkResults: await smartHomeAnalytics.getAllBlynkReadings(),
+      station: station,
     };
+    console.log(viewData.blynkResults);
     console.log("smartHome rendering");
     response.render("smarthome-view", viewData);
+  },
+  
+   // returns user based on browser request
+  async getLoggedInUser(request) {
+    const userId = request.cookies.weathertop2;
+    return await userStore.getUserById(userId);
   },
 };
 
@@ -87,11 +100,12 @@ onChildChanged(changeRef, (snapshot) => {
   const pressure = data.pressure;
   const humidity = data.humidity;
   const count = data.count;
+  const userEmail = data.email;
   console.log(event);
   console.log(temp);
   console.log(pressure);
   console.log(count);
-  stationController.addArduinoTouchReport(temp, pressure);
+  stationController.addArduinoTouchReport(userEmail, temp, pressure);
   /*
   childSnapshot.forEach(function(childSnapshot) {
     event = childSnapshot.val()["event"];
@@ -103,6 +117,8 @@ onChildChanged(changeRef, (snapshot) => {
       })
     */
 });
+
+
   
 /*
 changeRef.limitToLast(1).on("value", function(snapshot) {

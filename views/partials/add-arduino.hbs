@@ -1,0 +1,52 @@
+<div class="columns">
+  <div class="column">
+    <h2 class="subtitle has-text-link-dark is-5">Associate station with Arduino</h2>
+  </div>
+  <div class="column">
+    <!--
+    <a
+      href="/account/{{user._id}}/deleteuser"
+      class="button is-danger is-pulled-right"
+    >Delete Account</a>
+    -->
+  </div>
+</div>
+
+<div>
+  <h3 class="subtitle has-text-link-dark is-6">Station currently associated with your Arduino:</h3>
+  <p class="has-text-link-dark"><i class="fas fa-location-crosshairs"></i>
+      {{user.arduinoLocation}}
+  </p>
+</div>
+
+<br>
+
+<div>
+  <form action="/account/{{user._id}}/addarduino" method="POST">
+  <div class="columns has-text-link-dark">
+    <div class="field column">
+      <label>Select new station</label>
+      <div class="control has-icons-left">
+        <div class="select is-rounded">
+          <select name="arduinoLocation" required>
+            <option value="" selected disabled hidden>Choose here</option>
+            {{#each stations}}
+              <option value="{{location}}">{{location}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <span class="icon is-small is-left">
+          <i class="fas fa-location-crosshairs"></i>
+        </span>
+      </div>
+
+    </div>
+  </div>
+  <div class="field mt-4">
+    <div class="control">
+      <button class="button is-link">Confirm Arduino station</button>
+    </div>
+  </div>
+</form>
+</div>
+

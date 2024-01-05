@@ -30,7 +30,17 @@ export const userStore = {
     user.lastName = updatedUser.lastName;
     user.email = updatedUser.email;
     user.password = updatedUser.password;
+    user.arduinoLocation = updatedUser.arduinoLocation;
     await db.write();
+  },
+  
+  async updateArduinoPreference(userId, updatedUser) {
+    const user = await this.getUserById(userId);
+    console.log(`user to be updated: ${user._id}`);
+    user.arduinoLocation = updatedUser.arduinoLocation;
+    await db.write();
+    console.log("user updated, new values:");
+    console.log(user);
   },
   
   // returns a user based on the user ID

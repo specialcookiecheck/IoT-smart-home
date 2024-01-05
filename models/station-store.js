@@ -34,6 +34,16 @@ export const stationStore = {
     return station;
   },
   
+  async getStationByLocation(location) {
+    await db.read();
+    const station = await db.data.stations.find(
+      (station) => station.location === location
+    );
+    console.log("Station location: " + location);
+    station.readings = await readingStore.getReadingsByStationId(station._id);
+    return station;
+  },
+  
   // returns all stations associated with a user
   async getStationsByUserId(userid) {
     await db.read();

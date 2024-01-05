@@ -10,13 +10,15 @@ export const smartHomeAnalytics = {
     const blynkTemp = smartHomeAnalytics.blynkTemp(getBlynkReadings.data.v1);
     const blynkPressure = getBlynkReadings.data.v2;
     const blynkHumid = getBlynkReadings.data.v3;
+    const blynkLight = smartHomeAnalytics.blynkLight(getBlynkReadings.data.v4);
     const blynkResults = { 
       blynkRaw: getBlynkReadings.data, 
       button: blynkButton, 
       refreshPage: refreshPage,
       temp: blynkTemp, 
       pressure: blynkPressure, 
-      humidity: blynkHumid
+      humidity: blynkHumid,
+      light: blynkLight,
     };
     //const blynkReadings = getBlynkReadings;
     console.log(blynkResults);
@@ -39,5 +41,15 @@ export const smartHomeAnalytics = {
   blynkTemp(blynkReading) {
     const blynkTemp = `${Math.round(blynkReading * 100) / 100} Celsius`;
     return blynkTemp;
+  },
+  
+  blynkLight(blynkReading) {
+    let blynkLight;
+    if (blynkReading == 0) {
+      blynkLight = 'Dark';
+    } else {
+      blynkLight = 'Light';
+    }
+    return blynkLight;
   }
 }

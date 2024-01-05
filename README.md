@@ -11,3 +11,4 @@ References:
 - https://docs.blynk.io/en/blynk.console/settings/developers/webhooks
 - https://www.w3schools.com/js/js_json_parse.asp
 - https://support.arduino.cc/hc/en-us/articles/4407830972050-Find-and-stop-process-blocking-a-port
+- https://bulma.io/documentation/form/select/
