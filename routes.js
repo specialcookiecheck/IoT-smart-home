@@ -20,6 +20,7 @@ router.get("/account/:id", accountsController.index);
 router.post("/register", accountsController.register);
 router.post("/authenticate", accountsController.authenticate);
 router.post("/account/:userid/updateuser", accountsController.updateUser);
+router.post("/account/:userid/addarduino", accountsController.addArduinoLocation);
 router.get("/account/:userid/deleteuser", accountsController.deleteUser);
 
 router.get("/dashboard", dashboardController.index);

@@ -7,10 +7,23 @@ export const accountsController = {
   //renders account page
   async index(request, response) {
     const user = await accountsController.getLoggedInUser(request);
+    const stationList = await stationStore.getStationsByUserId(request.cookies.weathertop2);
+    await stationList.sort((a, b) => {
+      let stationA = a.location.toUpperCase(); // ignore upper and lowercase
+      let stationB = b.location.toUpperCase(); // ignore upper and lowercase
+      if (stationA < stationB) {
+        return -1; //stationA comes first
+      }
+      if (stationA > stationB) {
+        return 1; // stationB comes first
+      }
+      return 0; // stations are equal
+    });
     const viewData = {
       title: "Account",
       user: user,
       userId: user._id,
+      stations: stationList,
     };
     response.render("account-view", viewData);
   },
@@ -76,6 +89,19 @@ export const accountsController = {
     };
     console.log(`Updating User ${userId}`);
     await userStore.updateUser(userId, updatedUser);
+    response.redirect("/account/" + userId);
+  },
+  
+   // updates user account details
+  async addArduinoLocation(request, response) {
+    console.log(request);
+    const userId = request.cookies.weathertop2;
+    console.log("UserId: " + userId);
+    const updatedUser = {
+      arduinoLocation: request.body.arduinoLocation,
+    };
+    console.log(`Updating User ${userId}`);
+    await userStore.updateArduinoPreference(userId, updatedUser);
     response.redirect("/account/" + userId);
   },
   
