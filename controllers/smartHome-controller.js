@@ -91,7 +91,7 @@ onChildChanged(changeRef, (snapshot) => {
   console.log(temp);
   console.log(pressure);
   console.log(count);
-  stationController.addArduinoTouchReport(temp, pressure)
+  stationController.addArduinoTouchReport(temp, pressure);
   /*
   childSnapshot.forEach(function(childSnapshot) {
     event = childSnapshot.val()["event"];
