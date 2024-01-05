@@ -1,5 +1,6 @@
 import { smartHomeAnalytics } from "../utils/smarthome-analytics.js";
 import { stationController } from "./station-controller.js";
+import { accountsController } from "./accounts-controller.js";
 import { userStore } from "../models/user-store.js";
 import { stationStore } from "../models/station-store.js";
 import axios from "axios";
@@ -27,6 +28,7 @@ export const smartHomeController = {
       title: "Smart Home",
       blynkResults: await smartHomeAnalytics.getAllBlynkReadings(),
       station: station,
+      user: user,
     };
     console.log(viewData.blynkResults);
     console.log("smartHome rendering");
