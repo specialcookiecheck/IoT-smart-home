@@ -29,6 +29,7 @@ export const dashboardController = {
       title: "Station Dashboard",
       stations: stationList,
       userId: loggedInUser._id,
+      user: loggedInUser,
     };
     console.log("dashboard rendering");
     response.render("dashboard-view", viewData);

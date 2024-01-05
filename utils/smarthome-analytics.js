@@ -10,7 +10,7 @@ export const smartHomeAnalytics = {
     const blynkTemp = smartHomeAnalytics.blynkTemp(getBlynkReadings.data.v1);
     const blynkPressure = getBlynkReadings.data.v2;
     const blynkHumid = getBlynkReadings.data.v3;
-    const blynkLight = smartHomeAnalytics.blynkLight(getBlynkReadings.data.v4);
+    const blynkLight = getBlynkReadings.data.v4;
     const blynkResults = { 
       blynkRaw: getBlynkReadings.data, 
       button: blynkButton, 

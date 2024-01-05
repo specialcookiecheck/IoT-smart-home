@@ -1,5 +1,6 @@
 import { stationStore } from "../models/station-store.js";
 import { readingStore } from "../models/reading-store.js";
+import { accountsController } from "./accounts-controller.js";
 import { userStore } from "../models/user-store.js";
 import { stationAnalytics } from "../utils/station-analytics.js";
 import {  } from "../utils/station-analytics.js";
@@ -18,10 +19,12 @@ export const stationController = {
     await stationStore.updateStation(station);
     const updatedStation = await stationStore.getStationById(stationId);
     console.log("Loading viewData");
+    const loggedInUser = await accountsController.getLoggedInUser(request);
     const viewData = {
       title: updatedStation.location,
       station: updatedStation,
       userId: request.cookies.weathertop2,
+      user: loggedInUser,
     };
     response.render("station-view", viewData);
   },
